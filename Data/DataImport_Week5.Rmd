@@ -1,0 +1,90 @@
+---
+title: "DATA IMPORT - Week5"
+author: "Arzu Ozcan"
+date: "February 15, 2019"
+output: html_document
+---
+
+
+# Required Package to Load Files
+```
+library(tidyverse)
+```
+# Read Functions
+```
+read.csv()
+```
+```
+read.csv2()                         # Reads semicolon separated files ( where , used as the decimal place)
+read_tsv()                          # Reads tab delimited files
+read_delim()                        # Reads in files with any delimiter
+read_fwf()                          # Reads fixed width files
+fwf_widths()                        # Specify fields by their widths
+fwf_positions()                     # Specify fields by their position
+read_table()                        # Reads a common variation of fixed width files where columns are separated by white space
+read_log()                          # Reads Apache style log files
+name<-read_csv("path to the file")  # Gives a name to the file that is read with the path
+read_csv("a,b,c     
+1,2,3
+4,5,6")                             # Prints out a column specification that gives the name and type of each column
+
+
+read_csv("The first line of metadata
+The second line of metadata
+x,y,z
+1,2,3", skip = 2)                   # Use skip = n to skip the first n lines
+                                   
+read_csv("# A comment I want to skip
+x,y,z
+1,2,3", comment = "#")              # Use comment = "#" to drop all lines that start with (e.g.) #
+                                    
+
+read_csv("1,2,3\n4,5,6", col_names = FALSE)   # Use col_names = FALSE to tell read_csv() not to treat the first row as headings, and instead label them sequentially from X1 to Xn:
+                                    
+
+read_csv("1,2,3\n4,5,6", col_names = c("x", "y", "z"))  # USe col_names a character vector to name the columns
+                                    
+
+read_csv("a,b,c\n1,2,.", na = ".")  # Use na: this specifies the value (or values) that are used to represent missing values
+```                                    
+
+# Parse Functions              
+```
+str(parse_logical(c("TRUE", "FALSE", "NA")))            # Changes character vector into a logical vector
+                                                      
+
+str(parse_integer(c("1", "2", "3")))                    # Changes character vector into a integer vector
+                                                       
+
+str(parse_date(c("2010-01-01", "1979-10-14")))          # Changes character vector into a date vector
+                                                       
+
+parse_integer(c("1", "231", ".", "456"), na = ".")      # The first argument is a character vector to parse, and the na argument specifies which strings should be treated as missing
+                                                       
+
+parse_logical()       # Logical parser
+parse_integer()       # Integer parser 
+parse_double()        # Strict numeric parser 
+parse_number()        # Flexible numeric parser
+parse_character()     # Character encodings parser
+parse_factor()        # Create factors, the data structure that R uses to represent categorical variables with fixed and known values
+
+parse_datetime()      # Parse various date & time specifications
+parse_date()
+parse_time()       
+
+parse_double("1.23")
+                    
+parse_double("1,23", locale = locale(decimal_mark = ","))   # Converts "," into "."
+                                                
+guess_parser()        # Returns the best guess
+parse_guess()         # Uses the best guess to parse the column
+```
+
+# Write Functions
+```
+write_excel_csv()     # Writes a special character (a “byte order mark”) at the start of the file which tells Excel that you’re using the UTF-8 encoding.
+write_csv(challenge, "challenge.csv")
+```
+
+
